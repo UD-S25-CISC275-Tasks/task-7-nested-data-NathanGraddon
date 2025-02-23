@@ -6,7 +6,8 @@ import { Question, QuestionType } from "./interfaces/question";
  * that are `published`.
  */
 export function getPublishedQuestions(questions: Question[]): Question[] {
-    const copyQue = questions.filter((pub: Question): boolean => pub.published);
+    const deepCopy = questions.map((x: Question): Question => ({ ...x }));
+    const copyQue = deepCopy.filter((pub: Question): boolean => pub.published);
     return copyQue;
 }
 
@@ -16,7 +17,8 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
  * `expected`, and an empty array for its `options`.
  */
 export function getNonEmptyQuestions(questions: Question[]): Question[] {
-    const copyQue = questions.filter(
+    const deepCopy = questions.map((x: Question): Question => ({ ...x }));
+    const copyQue = deepCopy.filter(
         (x: Question): boolean =>
             x.body !== "" || x.expected !== "" || x.options.length !== 0,
     );
@@ -31,7 +33,8 @@ export function findQuestion(
     questions: Question[],
     id: number,
 ): Question | null {
-    const theQuestion = questions.find((x: Question): boolean => x.id === id);
+    const deepCopy = questions.map((x: Question): Question => ({ ...x }));
+    const theQuestion = deepCopy.find((x: Question): boolean => x.id === id);
     if (!theQuestion) {
         return null;
     }
@@ -43,7 +46,8 @@ export function findQuestion(
  * with the given `id`.
  */
 export function removeQuestion(questions: Question[], id: number): Question[] {
-    const remove = questions.filter((x: Question): boolean => x.id !== id);
+    const deepCopy = questions.map((x: Question): Question => ({ ...x }));
+    const remove = deepCopy.filter((x: Question): boolean => x.id !== id);
     return remove;
 }
 
@@ -52,7 +56,8 @@ export function removeQuestion(questions: Question[], id: number): Question[] {
  * questions, as an array.
  */
 export function getNames(questions: Question[]): string[] {
-    const justNames = questions.map((x: Question): string => x.name);
+    const deepCopy = questions.map((x: Question): Question => ({ ...x }));
+    const justNames = deepCopy.map((x: Question): string => x.name);
     return justNames;
 }
 
