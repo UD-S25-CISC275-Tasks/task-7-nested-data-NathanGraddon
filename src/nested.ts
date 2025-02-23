@@ -183,7 +183,11 @@ export function renameQuestionById(
     targetId: number,
     newName: string,
 ): Question[] {
-    return [];
+    const deepCopy = questions.map((x: Question): Question => ({ ...x }));
+    const newCopy = deepCopy.map((x: Question) =>
+        x.id == targetId ? { ...x, name: newName } : x,
+    );
+    return newCopy;
 }
 
 /***
