@@ -99,7 +99,20 @@ id,name,options,points,published
  * Check the unit tests for more examples!
  */
 export function toCSV(questions: Question[]): string {
-    return "";
+    const deepCopy = questions.map((x: Question): Question => ({ ...x }));
+    const toStr = deepCopy.map(
+        (x: Question) =>
+            x.id +
+            "," +
+            x.name +
+            "," +
+            x.options.length +
+            "," +
+            x.points +
+            "," +
+            x.published,
+    );
+    return ["id,name,options,points,published", ...toStr].join("\n");
 }
 
 /**
