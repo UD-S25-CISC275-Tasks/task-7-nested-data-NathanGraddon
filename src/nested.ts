@@ -65,7 +65,10 @@ export function getNames(questions: Question[]): string[] {
  * Consumes an array of questions and returns the sum total of all their points added together.
  */
 export function sumPoints(questions: Question[]): number {
-    return 0;
+    let total: number = 0;
+    const deepCopy = questions.map((x: Question): Question => ({ ...x }));
+    deepCopy.map((x: Question) => (total += x.points));
+    return total;
 }
 
 /***
