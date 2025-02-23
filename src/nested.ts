@@ -136,7 +136,9 @@ export function makeAnswers(questions: Question[]): Answer[] {
  * each question is now published, regardless of its previous published status.
  */
 export function publishAll(questions: Question[]): Question[] {
-    return [];
+    const deepCopy = questions.map((x: Question): Question => ({ ...x }));
+    const pub = deepCopy.map((x: Question) => ({ ...x, published: true }));
+    return pub;
 }
 
 /***
