@@ -16,7 +16,11 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
  * `expected`, and an empty array for its `options`.
  */
 export function getNonEmptyQuestions(questions: Question[]): Question[] {
-    return [];
+    const copyQue = questions.filter(
+        (x: Question): boolean =>
+            x.body !== "" || x.expected !== "" || x.options.length !== 0,
+    );
+    return copyQue;
 }
 
 /***
