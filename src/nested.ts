@@ -121,7 +121,14 @@ export function toCSV(questions: Question[]): string {
  * making the `text` an empty string, and using false for both `submitted` and `correct`.
  */
 export function makeAnswers(questions: Question[]): Answer[] {
-    return [];
+    const deepCopy = questions.map((x: Question): Question => ({ ...x }));
+    const answer = deepCopy.map((x: Question) => ({
+        questionId: x.id,
+        text: "",
+        submitted: false,
+        correct: false,
+    }));
+    return answer;
 }
 
 /***
