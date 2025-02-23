@@ -185,7 +185,7 @@ export function renameQuestionById(
 ): Question[] {
     const deepCopy = questions.map((x: Question): Question => ({ ...x }));
     const newCopy = deepCopy.map((x: Question) =>
-        x.id == targetId ? { ...x, name: newName } : x,
+        x.id === targetId ? { ...x, name: newName } : x,
     );
     return newCopy;
 }
@@ -202,7 +202,16 @@ export function changeQuestionTypeById(
     targetId: number,
     newQuestionType: QuestionType,
 ): Question[] {
-    return [];
+    const deepCopy = questions.map((x: Question): Question => ({ ...x }));
+    let newCopy = deepCopy.map((x: Question) =>
+        x.id === targetId ? { ...x, type: newQuestionType } : x,
+    );
+    newCopy.map((x) =>
+        x.id === targetId && x.type !== "multiple_choice_question" ?
+            (x.options = [])
+        :   x,
+    );
+    return newCopy;
 }
 
 /**
