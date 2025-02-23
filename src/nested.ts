@@ -146,6 +146,13 @@ export function publishAll(questions: Question[]): Question[] {
  * are the same type. They can be any type, as long as they are all the SAME type.
  */
 export function sameType(questions: Question[]): boolean {
+    const deepCopy = questions.map((x: Question): Question => ({ ...x }));
+    const sameType = deepCopy.filter(
+        (x: Question): boolean => deepCopy[0].type === x.type,
+    );
+    if (sameType.length === deepCopy.length) {
+        return true;
+    }
     return false;
 }
 
