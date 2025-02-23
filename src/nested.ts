@@ -230,7 +230,18 @@ export function editOption(
     targetOptionIndex: number,
     newOption: string,
 ): Question[] {
-    return [];
+    return questions.map((question) => {
+        if (question.id !== targetId) {
+            return question;
+        }
+        let update = [...question.options];
+        if (targetOptionIndex === -1) {
+            update.push(newOption);
+        } else {
+            update[targetOptionIndex] = newOption;
+        }
+        return { ...question, options: update };
+    });
 }
 
 /***
