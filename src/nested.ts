@@ -168,8 +168,8 @@ export function addNewQuestion(
     name: string,
     type: QuestionType,
 ): Question[] {
-    const deepCopy = questions.map((x: Question): Question => ({ ...x }));
-    deepCopy.push(makeBlankQuestion(id, name, type));
+    let deepCopy = questions.map((x: Question): Question => ({ ...x }));
+    deepCopy = [...deepCopy, makeBlankQuestion(id, name, type)];
     return deepCopy;
 }
 
@@ -236,7 +236,7 @@ export function editOption(
         }
         let update = [...question.options];
         if (targetOptionIndex === -1) {
-            update.push(newOption);
+            update = [...question.options, newOption];
         } else {
             update[targetOptionIndex] = newOption;
         }
